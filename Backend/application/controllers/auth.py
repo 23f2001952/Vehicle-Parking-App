@@ -14,9 +14,10 @@ def login():
         return jsonify('No user found'),401
     if check_password_hash(user.password,password) == False :
         return jsonify('Incorrect password!'),401
-    
+
     access_token=create_access_token(identity=user)
-    return jsonify(access_token=access_token)
+    role = user.role
+    return jsonify(access_token=access_token,role=role)
 
 def register():
 
@@ -31,6 +32,8 @@ def register():
         return jsonify('email Required'),401
     if not password:
         return jsonify('Password Required'),401
+    if not confirm_password:
+        return jsonify('Confirm Password Required'),401
     if password != confirm_password:
         return jsonify("Confirm password and passowrd doesn't match"),401
     
@@ -44,7 +47,7 @@ def register():
     if user:
         return jsonify('email already exists enter an different email'),401
     
-    db.session.add(User(username=username,email=email,password= generate_password_hash(password)))
+    db.session.add(User(username=username, email=email, password=generate_password_hash(password)))
     db.session.commit()
     return jsonify({"msg": "User created successfully"}), 201
 

@@ -5,6 +5,7 @@ from application.database import db
 from application.models  import User,ParkingLot
 from application.security import jwt
 from application.routes import api_bp
+from flask_cors import CORS
 
 app = None
 
@@ -30,6 +31,7 @@ def create_app():
     return app
 
 app = create_app()
+CORS(app, origins=['http://localhost:5173'])
 
 from application.routes import *
 

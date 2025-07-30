@@ -1,0 +1,34 @@
+import {createWebHistory,createRouter} from 'vue-router'
+import HomePage from './pages/HomePage.vue'
+import LoginPage from './pages/LoginPage.vue'
+import Dashboard from './pages/Dashboard.vue'
+import AdminDashboard from './components/AdminDashboard.vue';
+import UserDashboard from './components/UserDashboard.vue';
+import RegisterPage from './pages/RegisterPage.vue'
+
+
+const routes = [
+    {path: "/", component: HomePage},
+    {path: "/login", component: LoginPage},
+    {
+        path : "/dashboard", component : Dashboard,
+        meta : {requiresAuth : true},
+        children :[   
+            { path: "admin", component : AdminDashboard , meta : {role: 'admin'}},
+            { path: "user", component : UserDashboard, meta : {role: 'user'}}
+        ]
+    },
+    {path: '/register',component : RegisterPage}
+]
+
+
+
+
+
+export const router = createRouter(
+    {
+        history: createWebHistory(),
+        routes
+    }
+)
+
