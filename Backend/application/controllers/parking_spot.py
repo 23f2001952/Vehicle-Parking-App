@@ -104,13 +104,3 @@ def get_parking_spot_by_lot_id(lot_id):
 
     return jsonify({"spots": spots_json}), 200
 
-@role_required('admin')
-def parking_spot_analytics():
-    parking_spots = ParkingSpot.query.all()
-    analytics = {}
-    for spot in parking_spots:
-        if spot.status == 'occupied':
-            analytics['occupied'] = analytics.get('occupied', 0) + 1
-        elif spot.status == 'available':
-            analytics['available'] = analytics.get('available', 0) + 1
-    return jsonify(data=analytics), 200
