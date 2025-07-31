@@ -3,7 +3,10 @@
 </script>
 
 <template>
-    <h1>Welcome To ParkingPoint!!</h1>
-    <br>
-    <p>Your One Stop Solution To Book Parking Spot anywhere and Everywhere</p>
+  <div class="container my-5 p-5 bg-white text-center border border-black rounded shadow-sm">
+    <h1 class="display-4 fw-bold mb-4">🚗 Welcome to ParkingPoint!</h1>
+    <p class="lead text-secondary">
+      Your one-stop solution to book parking spots anywhere and everywhere.
+    </p>
+  </div>
 </template>

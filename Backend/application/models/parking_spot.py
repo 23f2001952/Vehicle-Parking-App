@@ -7,3 +7,4 @@ class ParkingSpot(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     lot_id = db.Column(db.Integer, db.ForeignKey('parking_lot.id'),nullable=False)
     status =  db.Column(db.Enum('available', 'occupied', name='parking_spot_status'),nullable=False,default='available')
+    bookings = db.relationship('BookingHistory', backref='spot', lazy=True)

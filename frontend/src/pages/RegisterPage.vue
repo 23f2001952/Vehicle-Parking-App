@@ -16,6 +16,8 @@ const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const register_error = ref('');
+const address = ref('');
+const pincode = ref('');
 
 function resetForm() {
     username.value = '';
@@ -51,7 +53,9 @@ async function registerUser() {
             username: username.value,
             email: email.value,
             password: password.value,
-            confirm_password: confirmPassword.value
+            confirm_password: confirmPassword.value,
+            address: address.value,
+            pincode: pincode.value
         });
         
         if (response.status === 201) {
@@ -121,7 +125,24 @@ async function registerUser() {
               placeholder="Confirm password"
             />
           </div>
-
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <input
+                    v-model="address"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter address"
+                />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Pincode</label>
+                <input
+                    v-model="pincode"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter pincode"
+                />
+            </div>
           <div class="d-flex justify-space-between ">
             <button type="submit" class="btn btn-primary border px-3">Register</button>
             <button type="reset" @click="resetForm" class="btn btn-secondary border mx-3">Reset</button>

@@ -5,7 +5,9 @@ import Dashboard from './pages/Dashboard.vue'
 import AdminDashboard from './components/AdminDashboard.vue';
 import UserDashboard from './components/UserDashboard.vue';
 import RegisterPage from './pages/RegisterPage.vue'
-
+import UsersPage from './pages/UsersPage.vue'
+import SummaryPage from './pages/SummaryPage.vue'
+import UserSummaryPage from './pages/UserSummaryPage.vue'
 
 const routes = [
     {path: "/", component: HomePage},
@@ -18,7 +20,10 @@ const routes = [
             { path: "user", component : UserDashboard, meta : {role: 'user'}}
         ]
     },
-    {path: '/register',component : RegisterPage}
+    {path: '/register',component : RegisterPage},
+    {path: '/Users', component: UsersPage, meta: {requiresAuth: true, role: 'admin'}},
+    {path: '/Summary', component: SummaryPage, meta: {requiresAuth: true}},
+    {path: '/UserSummary', component: UserSummaryPage, meta: {requiresAuth: true, role: 'user'}}
 ]
 
 

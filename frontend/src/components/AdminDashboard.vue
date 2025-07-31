@@ -6,8 +6,7 @@ import ParkingLotContainer from './ParkingLotContainer.vue'
 </script>
 
 <template>
-    <div>
-        <p>This is the Admin dashboard!</p>
+    <div class="container border border-black rounded" style="margin-top: 20px; width: 100%;">
         <ParkingLotContainer/>
     </div>  
 </template>
