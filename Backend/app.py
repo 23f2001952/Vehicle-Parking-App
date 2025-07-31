@@ -6,6 +6,9 @@ from application.models  import User,ParkingLot
 from application.security import jwt
 from application.routes import api_bp
 from flask_cors import CORS
+from application.celery_init import celery_init_app
+from celery.schedules import crontab
+from application.tasks import user_csv_report, monthly_report, generate_msg
 
 app = None
 
@@ -32,6 +35,16 @@ def create_app():
 
 app = create_app()
 CORS(app, origins=['http://localhost:5173'])
+celery = celery_init_app(app)
+celery.autodiscover_tasks()
+
+@celery.on_after_finalize.connect
+def setup_periodic_tasks(sender, **kwargs):
+    sender.add_periodic_task(
+        crontab( minute='*/1'),
+        monthly_report.s(),
+        name='monthly_report_task'
+    ) 
 
 from application.routes import *
 
